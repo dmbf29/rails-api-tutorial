@@ -77,3 +77,5 @@ It's up to you at this point, but we'll add two validations on the `cafe` model 
 validates :title, presence: true
 validates :gmaps_url, presence: true
 ```
+
+## Routes
