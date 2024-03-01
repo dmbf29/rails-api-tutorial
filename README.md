@@ -16,16 +16,20 @@ Also, the `-d` makes sure we start with a postgresql database (instead of the de
 
 ## Designing the DB
 We're going to keep this tutorial simple. We'll just have a `cafe` model. Based around [this information](https://gist.github.com/yannklein/5d8f9acb1c22549a4ede848712ed651a), which we'll be seeding into our app eventually.
-<p><img width="114" alt="image" src="https://github.com/dmbf29/rails-api-tutorial/assets/25542223/86fe6250-b2ac-4fcc-bce5-1d4d2662035d"></p>
+<p>
+  <img width="110" alt="image" src="https://github.com/dmbf29/rails-api-tutorial/assets/25542223/d09c4e6c-a328-4bcc-9407-f2a971535c47">
+</p>
 
 Data types:
-- title -> string
-- address -> string
-- gmaps_url -> string
-- picture -> string (⚠️ We're not using ActiveStorage for simplicity sake).
-- informations -> hash (⚠️ see how to create this below)
+- title `->` string
+- address `->` string
+- gmaps_url `->` string
+- picture `->` string (⚠️ We're not using ActiveStorage for simplicity sake).
+- informations `->` hash (⚠️ see how to create this below)
+
 ie: `"informations": { "Mon": [ "08:00 - 23:00" ], "Tue": [ "08:00 - 23:00" ], ...`
-- criteria -> array (⚠️ see how to create this below)
+- criteria `->` array (⚠️ see how to create this below)
+
 ie: `"criteria": [ "Stable Wi-Fi", "Power sockets", "Quiet", "Coffee", "Food" ]`
 
 ## Creating the Model
