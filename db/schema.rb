@@ -10,19 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_01_005850) do
+ActiveRecord::Schema[7.1].define(version: 0) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "caves", force: :cascade do |t|
-    t.string "title"
-    t.string "address"
-    t.string "gmaps_url"
-    t.string "picture"
-    t.jsonb "informations"
-    t.string "criterion", array: true
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
 end

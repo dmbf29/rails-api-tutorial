@@ -22,11 +22,11 @@ Data types:
 - title -> string
 - address -> string
 - gmaps_url -> string
-- picture -> string (⚠️ An external url, not using ActiveStorage)
+- picture -> string (⚠️ We're not using ActiveStorage for simplicity sake).
 - informations -> hash (⚠️ see how to create this below)
-ie: `"informations": { "Mon": [ "08:00 \u2013 23:00" ], "Tue": [ "08:00 \u2013 23:00" ], ...`
-- criterion -> array (⚠️ see how to create this below)
-ie: `"criterion": [ "Stable Wi-Fi", "Power sockets", "Quiet", "Coffee", "Food" ]`
+ie: `"informations": { "Mon": [ "08:00 - 23:00" ], "Tue": [ "08:00 - 23:00" ], ...`
+- criteria -> array (⚠️ see how to create this below)
+ie: `"criteria": [ "Stable Wi-Fi", "Power sockets", "Quiet", "Coffee", "Food" ]`
 
 ## Creating the Model
 Create the DB before the model
@@ -34,18 +34,29 @@ Create the DB before the model
 rails db:create
 ```
 
-Then the model
+⚠️ Small warning about pluralization in Rails 😅
+- The pluralization is built in to handle things like `person` => `people` and `sky` => `skies` etc.
+- But when we generate a `cafe` model in Rails, it creates a table called `caves`.... which is obviously **not** what we want. Here is a [StackOverflow answer on how to fix it](https://stackoverflow.com/a/10861810/8278088)
+
+So let's go into our `config/initializers/inflections.rb` and add this:
 ```
-rails g model cafe title:string address:string gmaps_url:string picture:string informations:jsonb criterion:string
+ActiveSupport::Inflector.inflections do |inflect|
+  inflect.plural "cafe", "cafes"
+end
+```
+
+Then create the model
+```
+rails g model cafe title:string address:string gmaps_url:string picture:string informations:jsonb criteria:string
 ```
 
 You'll notice that when we create the `informations` hash, we're actually using a `jsonb` type.
 
 _You can see how this works in the [official documentaion](https://guides.rubyonrails.org/active_record_postgresql.html#json-and-jsonb)_.
 
-And when we create the `criterion` array, we're actually specifying a string **at first**. But we'll have to update the migration (before we migrate) to indicate we're using an array:
+And also when we create the `criteria` array, we're actually specifying a string **at first**. But we'll have to update the migration (before we migrate) to indicate we're using an array:
 ```
-t.string :criterion, array: true
+t.string :criteria, array: true
 ```
 _You can see how this works in the [official documentaion](https://guides.rubyonrails.org/active_record_postgresql.html#array)_.
 
@@ -53,3 +64,6 @@ Then run the migration and our DB should be ready to go.
 ```
 rails db:migrate
 ```
+
+## Setting up the Model
+It's up to you at this point, but we'll add two validations on the `cafe` model so that we need at least a `title` and
