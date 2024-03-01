@@ -104,4 +104,8 @@ To generate
 rails g controller api/v1/cafes
 ```
 
-This creates a folder called `api` inside of our `controllers` folder. Then another one called `v1` inside of that.
+This will create our controller. But also, it creates a folder called `api` inside of our `controllers` folder. Then another one called `v1` inside of that.
+<p>
+  <img width="305" alt="image" src="https://github.com/dmbf29/rails-api-tutorial/assets/25542223/57ccf834-d805-403c-9f85-82a40886f410">
+</p>
+
