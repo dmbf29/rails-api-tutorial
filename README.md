@@ -17,3 +17,26 @@ Also, the `-d` makes sure we start with a postgresql database (instead of the de
 ## Designing the DB
 We're going to keep this tutorial simple. We'll just have a `cafe` model. Based around [this information](https://gist.github.com/yannklein/5d8f9acb1c22549a4ede848712ed651a), which we'll be seeding into our app eventually.
 <p><img width="114" alt="image" src="https://github.com/dmbf29/rails-api-tutorial/assets/25542223/86fe6250-b2ac-4fcc-bce5-1d4d2662035d"></p>
+
+Data types:
+- title -> string
+- address -> string
+- gmaps_url -> string
+- picture -> string (⚠️ An external url, not using ActiveStorage)
+- informations -> hash (⚠️ see how to create this below)
+ie: `"informations": { "Mon": [ "08:00 \u2013 23:00" ], "Tue": [ "08:00 \u2013 23:00" ], ...`
+- criterion -> array (⚠️ see how to create this below)
+ie: `"criterion": [ "Stable Wi-Fi", "Power sockets", "Quiet", "Coffee", "Food" ]`
+
+## Creating the Model
+```
+rails g model cafe title:string address:string gmaps_url:string picture:string informations:jsonb criterion:string
+```
+You'll notice that when we create the `informations` hash, we're actually using a `jsonb` type.
+_You can see how this works in the [official documentaion](https://guides.rubyonrails.org/active_record_postgresql.html#json-and-jsonb)_.
+
+And when we create the `criterion` array, we're actually specifying a string *at first*. But we'll have to update the migration (before we migrate) to indicate we're using an array:
+```
+t.string :criterion, array: true
+```
+_You can see how this works in the [official documentaion](https://guides.rubyonrails.org/active_record_postgresql.html#array)_.
