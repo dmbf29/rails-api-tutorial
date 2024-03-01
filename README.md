@@ -12,4 +12,5 @@ With the `--api` flag, there are 3 main differences:
 Also, the `-d` makes sure we start with a postgresql database (instead of the default sqlite)
 
 ## Designing the DB
-We're going to keep this tutorial simple. We'll just have a `cafe` model.
+We're going to keep this tutorial simple. We'll just have a `cafe` model. Based around [this information](https://gist.github.com/yannklein/5d8f9acb1c22549a4ede848712ed651a), which we'll be seeding into our app eventually.
+<p><img width="114" alt="image" src="https://github.com/dmbf29/rails-api-tutorial/assets/25542223/86fe6250-b2ac-4fcc-bce5-1d4d2662035d"></p>
