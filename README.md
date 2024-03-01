@@ -111,6 +111,7 @@ This creates our controller. But also, it creates a folder called `api` inside o
 
 ### Controller Actions
 
+#### Index
 Let's start with the index. It will follow normal Rails CRUD to pull all of the cafes from the DB.
 ```
 def index
@@ -144,6 +145,41 @@ end
 Now let's test out the endpoint. If we want to see our routes, we can check with `rails routes`.
 This tells us to trigger our `cafes#index` action, we need to type `/api/v1/cafes` after our localhost.
 Launch a `rails s` and check it out in the browser. You should be seeing JSON (intead of HTML).
+
+#### Create
+
+
+## Last Feature
+We've "tagged" our cafes with certain criteria ie: `wifi`, `outlets`, `coffee` etc.
+Let's create an end-point for our front-end so that we can display all of these criteria.
+
+### Criteria Route
+Add in a criteria index inside our our namespaced routes.
+```
+namespace :api, defaults: { format: :json } do
+  namespace :v1 do
+    resources :cafes, only: [ :index, :create ]
+    resources :criteria, only: [ :index ]
+  end
+end
+```
+
+### Criteria Controller
+Generate controller
+```
+rails g controller api/v1/criteria
+```
+
+### Criteria Controller Action
+We don't actually have a criteria model so we're going to pull all of the criteria from our `cafe`s using the `.pluck` method. Then make sure we're not duplicating any using the `.uniq` method:
+```
+def index
+  @criteria = Cafe.pluck(:criteria).uniq
+  render json: @criteria
+end
+```
+
+
 
 ## Going Further
 - Adding users
