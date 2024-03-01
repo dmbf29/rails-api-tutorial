@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  address: MyString
+  gmaps_url: MyString
+  picture: MyString
+  informations: 
+  criterion: MyString
+
+two:
+  title: MyString
+  address: MyString
+  gmaps_url: MyString
+  picture: MyString
+  informations: 
+  criterion: MyString

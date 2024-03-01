@@ -1,0 +1,2 @@
+class Cafe < ApplicationRecord
+end

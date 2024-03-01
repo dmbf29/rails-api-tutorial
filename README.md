@@ -29,14 +29,27 @@ ie: `"informations": { "Mon": [ "08:00 \u2013 23:00" ], "Tue": [ "08:00 \u2013 2
 ie: `"criterion": [ "Stable Wi-Fi", "Power sockets", "Quiet", "Coffee", "Food" ]`
 
 ## Creating the Model
+Create the DB before the model
+```
+rails db:create
+```
+
+Then the model
 ```
 rails g model cafe title:string address:string gmaps_url:string picture:string informations:jsonb criterion:string
 ```
+
 You'll notice that when we create the `informations` hash, we're actually using a `jsonb` type.
+
 _You can see how this works in the [official documentaion](https://guides.rubyonrails.org/active_record_postgresql.html#json-and-jsonb)_.
 
-And when we create the `criterion` array, we're actually specifying a string *at first*. But we'll have to update the migration (before we migrate) to indicate we're using an array:
+And when we create the `criterion` array, we're actually specifying a string **at first**. But we'll have to update the migration (before we migrate) to indicate we're using an array:
 ```
 t.string :criterion, array: true
 ```
 _You can see how this works in the [official documentaion](https://guides.rubyonrails.org/active_record_postgresql.html#array)_.
+
+Then run the migration and our DB should be ready to go.
+```
+rails db:migrate
+```
