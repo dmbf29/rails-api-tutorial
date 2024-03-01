@@ -1,6 +1,6 @@
 # Rails API Tutorial - Cafes Example
 
-1. Create the application
+## Create the application
 ```
 rails new NAME_OF_YOUR_APPLICATION -d postgresql --api
 ```
@@ -10,3 +10,6 @@ With the `--api` flag, there are 3 main differences:
 - Configure the generators to skip generating views, helpers, and assets when you generate a new resource.
 
 Also, the `-d` makes sure we start with a postgresql database (instead of the default sqlite)
+
+## Designing the DB
+We're going to keep this tutorial simple. We'll just have a `cafe` model.
