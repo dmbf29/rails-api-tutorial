@@ -70,4 +70,10 @@ rails db:migrate
 ```
 
 ## Setting up the Model
-It's up to you at this point, but we'll add two validations on the `cafe` model so that we need at least a `title` and
+It's up to you at this point, but we'll add two validations on the `cafe` model so that we need at least a `title` and `gmaps_url` in order to create one.
+
+```
+# cafe.rb
+validates :title, presence: true
+validates :gmaps_url, presence: true
+```
