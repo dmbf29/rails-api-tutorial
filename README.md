@@ -17,20 +17,17 @@ Also, the `-d` makes sure we start with a postgresql database (instead of the de
 ## Designing the DB
 We're going to keep this tutorial simple. We'll just have a `cafe` model. Based around [this information](https://gist.github.com/yannklein/5d8f9acb1c22549a4ede848712ed651a), which we'll be seeding into our app eventually.
 <p>
-  <img width="110" alt="image" src="https://github.com/dmbf29/rails-api-tutorial/assets/25542223/d09c4e6c-a328-4bcc-9407-f2a971535c47">
+  <img width="108" alt="image" src="https://github.com/dmbf29/rails-api-tutorial/assets/25542223/daa380d6-26da-4e1f-8e66-40293899a571">
 </p>
 
 Data types:
 - title `->` string
 - address `->` string
-- gmaps_url `->` string
 - picture `->` string (⚠️ We're not using ActiveStorage for simplicity sake).
-- informations `->` hash (⚠️ see how to create this below)
-
-ie: `"informations": { "Mon": [ "08:00 - 23:00" ], "Tue": [ "08:00 - 23:00" ], ...`
+- hours `->` hash (⚠️ see how to create this below)
+- ie: `"hours": { "Mon": [ "08:00 - 23:00" ], "Tue": [ "08:00 - 23:00" ], ...`
 - criteria `->` array (⚠️ see how to create this below)
-
-ie: `"criteria": [ "Stable Wi-Fi", "Power sockets", "Quiet", "Coffee", "Food" ]`
+- ie: `"criteria": [ "Stable Wi-Fi", "Power sockets", "Quiet", "Coffee", "Food" ]`
 
 ## Creating the Model
 Create the DB before the model
@@ -51,10 +48,10 @@ end
 
 Then create the model
 ```
-rails g model cafe title:string address:string gmaps_url:string picture:string informations:jsonb criteria:string
+rails g model cafe title:string address:string picture:string hours:jsonb criteria:string
 ```
 
-You'll notice that when we create the `informations` hash, we're actually using a `jsonb` type.
+You'll notice that when we create the `hours` hash, we're actually using a `jsonb` type.
 
 _You can see how this works in the [official documentaion](https://guides.rubyonrails.org/active_record_postgresql.html#json-and-jsonb)_.
 
@@ -70,12 +67,12 @@ rails db:migrate
 ```
 
 ## Setting up the Model
-It's up to you at this point, but we'll add two validations on the `cafe` model so that we need at least a `title` and `gmaps_url` in order to create one.
+It's up to you at this point, but we'll add two validations on the `cafe` model so that we need at least a `title` and `address` in order to create one.
 
 ```
 # cafe.rb
 validates :title, presence: true
-validates :gmaps_url, presence: true
+validates :address, presence: true
 ```
 
 ## Routes
