@@ -3,9 +3,8 @@ class CreateCafes < ActiveRecord::Migration[7.1]
     create_table :cafes do |t|
       t.string :title
       t.string :address
-      t.string :gmaps_url
       t.string :picture
-      t.jsonb :informations
+      t.jsonb :hours
       t.string :criteria, array: true
 
       t.timestamps
