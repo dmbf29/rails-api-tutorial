@@ -9,6 +9,9 @@ With the `--api` flag, there are 3 main differences:
 - Make `ApplicationController` inherit from `ActionController::API` instead of `ActionController::Base`. As with middleware, this will leave out any Action Controller modules that provide functionalities primarily used by browser applications.
 - Configure the generators to skip generating views, helpers, and assets when you generate a new resource.
 
+You can read more about the changes in the [official documentation](https://guides.rubyonrails.org/api_app.html).
+
+
 Also, the `-d` makes sure we start with a postgresql database (instead of the default sqlite)
 
 ## Designing the DB
