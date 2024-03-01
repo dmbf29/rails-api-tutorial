@@ -88,10 +88,10 @@ So our user stories with routes:
 How to namespace in our `routes.rb`
 ```
 namespace :api, defaults: { format: :json } do
-    namespace :v1 do
-      resources :cafes, only: [ :index, :create ]
-    end
+  namespace :v1 do
+    resources :cafes, only: [ :index, :create ]
   end
+end
 ```
 
 Here we're also saying to expect json (since it's an API) instead of the normal HTML flow.
@@ -104,8 +104,52 @@ To generate
 rails g controller api/v1/cafes
 ```
 
-This will create our controller. But also, it creates a folder called `api` inside of our `controllers` folder. Then another one called `v1` inside of that.
+This creates our controller. But also, it creates a folder called `api` inside of our `controllers` folder. Then another one called `v1` inside of that.
 <p>
   <img width="305" alt="image" src="https://github.com/dmbf29/rails-api-tutorial/assets/25542223/57ccf834-d805-403c-9f85-82a40886f410">
 </p>
 
+### Controller Actions
+
+Let's start with the index. It will follow normal Rails CRUD to pull all of the cafes from the DB.
+```
+def index
+  @cafes = Cafe.all
+end
+```
+
+If we allow users to search for cafes by their `title` in our app, we can add that into our action as well:
+```
+def index
+  if params[:title].present?
+    @cafes = Cafe.where('title ILIKE ?', "%#{params[:title]}%")
+  else
+    @cafes = Cafe.all
+  end
+end
+```
+
+**BUT**, this is the biggest difference from building an API compared to one with HTML views. Instead of rendering HTML, we're going to render JSON.
+```
+def index
+  if params[:title].present?
+    @cafes = Cafe.where('title ILIKE ?', "%#{params[:title]}%")
+  else
+    @cafes = Cafe.all
+  end
+  render json: @cafes
+end
+```
+
+Now let's test out the endpoint. If we want to see our routes, we can check with `rails routes`.
+This tells us to trigger our `cafes#index` action, we need to type `/api/v1/cafes` after our localhost.
+Launch a `rails s` and check it out in the browser. You should be seeing JSON (intead of HTML).
+
+## Going Further
+- Adding users
+- Adding ActiveStorage and Cloudinary
+- Using JBuilder for JSON views
+
+## TODO
+- seeds
+- application controller / errors
