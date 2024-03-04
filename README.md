@@ -138,7 +138,8 @@ def index
   else
     @cafes = Cafe.all
   end
-  render json: @cafes
+  # Putting the most recently created cafes first
+  render json: @cafes.order(created_at: :desc)
 end
 ```
 

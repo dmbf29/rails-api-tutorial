@@ -5,7 +5,7 @@ class Api::V1::CafesController < ApplicationController
     else
       @cafes = Cafe.all
     end
-    render json: @cafes
+    render json: @cafes.order(created_at: :desc)
   end
 
   def create
