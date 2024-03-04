@@ -172,6 +172,9 @@ end
 
 ℹ️ If you've added or changed any of the attributes for your model, make sure to update the strong parameters to match.
 
+##### Testing the create
+⚠️ Now how can we test this create action? We **can't test it by typing a URL in the browser. We need to send a `POST` request instead of a `GET`. And we don't have an HTML form either. The easiest way to test this endpoint would be to use [Postman](https://www.postman.com/). In Postman, we'll need to make sure we're sending a `POST` to the correct address, but also sending the correct params. We'll want our request to look like this:
+
 
 ## Last Feature
 We've "tagged" our cafes with certain criteria ie: `wifi`, `outlets`, `coffee` etc.
