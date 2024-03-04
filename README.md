@@ -173,23 +173,26 @@ end
 ℹ️ If you've added or changed any of the attributes for your model, make sure to update the strong parameters to match.
 
 ##### Testing the create
-⚠️ Now how can we test this create action? We **can't test it by typing a URL in the browser. We need to send a `POST` request instead of a `GET`. And we don't have an HTML form either. The easiest way to test this endpoint would be to use [Postman](https://www.postman.com/). In Postman, we'll need to make sure we're sending a `POST` to the correct address, but also sending the correct params. We'll want our request to look like this:
-<p><img width="1384" alt="image" src="https://github.com/dmbf29/rails-api-tutorial/assets/25542223/c41a7ccf-5d03-4df8-a139-203f4050b430"></p>
+⚠️ Now how can we test this create action? We **can't** test it by typing a URL in the browser. We need to send a `POST` request instead of a `GET`. And we don't have an HTML form either. The easiest way to test this endpoint would be to use [Postman](https://www.postman.com/). In Postman, we'll need to make sure we're sending a `POST` to the correct address, but also sending the correct params. We'll want our request to look like this:
+<p>
+<img width="1383" alt="image" src="https://github.com/dmbf29/rails-api-tutorial/assets/25542223/9f640d69-aecb-417e-af64-ad204651125e">
+</p>
 Or just the request code:
+
 ```
 {
   "cafe": {
-    "title": "Le Wagon Tokoy",
+    "title": "Le Wagon Tokyo",
     "address": "2-11-3 Meguro, Meguro City, Tokyo 153-0063",
     "picture": "https://www-img.lewagon.com/wtXjAOJx9hLKEFC89PRyR9mSCnBOoLcerKkhWp-2OTE/rs:fill:640:800/plain/s3://wagon-www/x385htxbnf0kam1yoso5y2rqlxuo",
     "criteria": ["Stable Wi-Fi", "Power sockets", "Coffee", "Food"],
     "hours": {
-        "Mon": ["10:30 – 18:00"],
-        "Tue": ["10:30 – 18:00"],
-        "Wed": ["10:30 – 18:00"],
-        "Thu": ["10:30 – 18:00"],
-        "Fri": ["10:30 – 18:00"],
-        "Sat": ["10:30 – 18:00"]
+      "Mon": ["10:30 – 18:00"],
+      "Tue": ["10:30 – 18:00"],
+      "Wed": ["10:30 – 18:00"],
+      "Thu": ["10:30 – 18:00"],
+      "Fri": ["10:30 – 18:00"],
+      "Sat": ["10:30 – 18:00"]
     }
   }
 }
