@@ -147,6 +147,30 @@ This tells us to trigger our `cafes#index` action, we need to type `/api/v1/cafe
 Launch a `rails s` and check it out in the browser. You should be seeing JSON (intead of HTML).
 
 #### Create
+Our create action is going to look exactly like a normal CRUD create action, except for when an error occurs. Instead of rerendering a form like we would in HTML, we'll respond back with the error inside of the JSON response:
+```
+render json: { error: @cafe.errors.messages }, status: :unprocessable_entity
+```
+
+So our full `create` controller action will look something like:
+```
+def create
+  @cafe = Cafe.new(cafe_params)
+  if @cafe.save
+    render json: @cafe
+  else
+    render json: { error: @cafe.errors.messages }, status: :unprocessable_entity
+  end
+end
+
+private
+
+def cafe_params
+  params.require(:cafe).permit(:title, :address, :picture, :address, :hours, criteria: [])
+end
+```
+
+ℹ️ If you've added or changed any of the attributes for your model, make sure to update the strong parameters to match.
 
 
 ## Last Feature
@@ -171,13 +195,15 @@ rails g controller api/v1/criteria
 ```
 
 ### Criteria Controller Action
-We don't actually have a criteria model so we're going to pull all of the criteria from our `cafe`s using the `.pluck` method. Then make sure we're not duplicating any using the `.uniq` method:
+We don't actually have a criteria model so we're going to pull all of the criteria from our `cafe`s using the `.pluck` and `.flatten` methods. Then make sure we're not duplicating any using the `.uniq` method:
 ```
 def index
-  @criteria = Cafe.pluck(:criteria).uniq
+  @criteria = Cafe.pluck(:criteria).flatten.uniq
   render json: @criteria
 end
 ```
+
+We can test it out by visiting `/api/v1/criteria` in the browser which should return a JSON array of our criteria.
 
 
 
