@@ -167,7 +167,7 @@ end
 private
 
 def cafe_params
-  params.require(:cafe).permit(:title, :address, :picture, :address, :hours, criteria: [])
+  params.require(:cafe).permit(:title, :address, :picture, :address, hours: {}, criteria: [])
 end
 ```
 
