@@ -1,5 +1,13 @@
 # Rails API Tutorial - Cafes Example
 
+Note: the slide version of this workshop is available [here](https://slides.trouni.com/?src=https://raw.githubusercontent.com/dmbf29/rails-api-tutorial/master/README.md#/).
+
+
+## Prerequisites
+This workshop is going to be breaking down the steps of how turn a Rails app into a simple API.
+
+We'll be going under the assumption, we've build previous Rails apps before.
+
 
 ## Create the application
 ```sh
@@ -200,6 +208,7 @@ end
 
 Now let's test out the endpoint. If we want to see our routes, we can check with `rails routes`.
 This tells us to trigger our `cafes#index` action, we need to type `/api/v1/cafes` after our localhost.
+
 Launch a `rails s` and check it out in the browser. You should be seeing JSON (intead of HTML).
 
 
