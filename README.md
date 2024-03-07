@@ -55,6 +55,7 @@ Then create the model
 rails g model cafe title:string address:string picture:string hours:jsonb criteria:string
 ```
 
+
 You'll notice that when we create the `hours` hash, we're actually using a `jsonb` type.
 
 _You can see how this works in the [official documentaion](https://guides.rubyonrails.org/active_record_postgresql.html#json-and-jsonb)_.
@@ -64,6 +65,7 @@ And also when we create the `criteria` array, we're actually specifying a string
 t.string :criteria, array: true
 ```
 _You can see how this works in the [official documentaion](https://guides.rubyonrails.org/active_record_postgresql.html#array)_.
+
 
 Then run the migration and our DB should be ready to go.
 ```sh
@@ -124,10 +126,14 @@ If this is your first time building an API the routing is going to look a bit di
 
 So our user stories with routes:
 - I can see all cafes
-- get `/api/v1/cafes`
+```
+get '/api/v1/cafes'
+```
 
 - I can create a cafe
-- post `/api/v1/cafes`
+```
+post '/api/v1/cafes'
+```
 
 
 How to namespace in our `routes.rb`
