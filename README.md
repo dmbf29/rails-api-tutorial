@@ -1,5 +1,6 @@
 # Rails API Tutorial - Cafes Example
 
+
 ## Create the application
 ```
 rails new NAME_OF_YOUR_APPLICATION -d postgresql --api
@@ -11,8 +12,8 @@ With the `--api` flag, there are 3 main differences:
 
 You can read more about the changes in the [official documentation](https://guides.rubyonrails.org/api_app.html).
 
-
 Also, the `-d` makes sure we start with a postgresql database (instead of the default sqlite)
+
 
 ## Designing the DB
 We're going to keep this tutorial simple. We'll just have a `cafe` model. Based around [this information](https://gist.github.com/yannklein/5d8f9acb1c22549a4ede848712ed651a), which we'll be seeding into our app eventually.
@@ -29,11 +30,13 @@ Data types:
 - criteria `->` array (⚠️ see how to create this below)
 - ie: `"criteria": [ "Stable Wi-Fi", "Power sockets", "Quiet", "Coffee", "Food" ]`
 
+
 ## Creating the Model
 Create the DB before the model
 ```
 rails db:create
 ```
+
 
 ⚠️ Small warning about pluralization in Rails 😅
 - The pluralization is built in to handle things like `person` => `people` and `sky` => `skies` etc.
@@ -45,6 +48,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.plural "cafe", "cafes"
 end
 ```
+
 
 Then create the model
 ```
@@ -66,6 +70,7 @@ Then run the migration and our DB should be ready to go.
 rails db:migrate
 ```
 
+
 ## Setting up the Model
 It's up to you at this point, but we'll add two validations on the `cafe` model so that we need at least a `title` and `address` in order to create one.
 
@@ -75,12 +80,14 @@ validates :title, presence: true
 validates :address, presence: true
 ```
 
+
 ## Seeds
 We were basing our data on around [this information](https://gist.github.com/yannklein/5d8f9acb1c22549a4ede848712ed651a) already so we've got a JSON that we can use in our seeds.
 
 1. We'll open that link using `open-uri`
 2. Turn the JSON result into a Ruby array
 3. Iterate over the array and create an instance of a `cafe` for each hash in the array.
+
 
 The point of this workshop is not how to seed the DB, so the code is already set in our `db/seeds.rb` file.
 ```
@@ -108,7 +115,9 @@ end
 puts "... created #{Cafe.count} cafes! ☕️"
 ```
 
+
 Run the seeds `rails db:seed` and have a look in the `rails console` to see our cafes.
+
 
 ## Routes
 If this is your first time building an API the routing is going to look a bit different from normal CRUD routes inside of a Rails app. We're going to add the word `api` in our route but also version it. So that if we end up updating the API, we dont have to break the old flow for apps relying on it. We can just shift to the second version.
@@ -120,6 +129,7 @@ So our user stories with routes:
 - I can create a cafe
 - post `/api/v1/cafes`
 
+
 How to namespace in our `routes.rb`
 ```
 namespace :api, defaults: { format: :json } do
@@ -130,6 +140,7 @@ end
 ```
 
 Here we're also saying to expect json (since it's an API) instead of the normal HTML flow.
+
 
 ## Controllers
 Now we need to create the `cafes_controller` but we're going to create one specifically for `v1` of our `api`. This gives us flexibility later on to create a separate controller for the next version.
@@ -143,6 +154,7 @@ This creates our controller. But also, it creates a folder called `api` inside o
 <p>
   <img width="305" alt="image" src="https://github.com/dmbf29/rails-api-tutorial/assets/25542223/57ccf834-d805-403c-9f85-82a40886f410">
 </p>
+
 
 ### Controller Actions
 
@@ -165,6 +177,7 @@ def index
 end
 ```
 
+
 **BUT**, this is the biggest difference from building an API compared to one with HTML views. Instead of rendering HTML, we're going to render JSON.
 ```
 def index
@@ -178,15 +191,18 @@ def index
 end
 ```
 
+
 Now let's test out the endpoint. If we want to see our routes, we can check with `rails routes`.
 This tells us to trigger our `cafes#index` action, we need to type `/api/v1/cafes` after our localhost.
 Launch a `rails s` and check it out in the browser. You should be seeing JSON (intead of HTML).
+
 
 #### Create
 Our create action is going to look exactly like a normal CRUD create action, except for when an error occurs. Instead of rerendering a form like we would in HTML, we'll respond back with the error inside of the JSON response:
 ```
 render json: { error: @cafe.errors.messages }, status: :unprocessable_entity
 ```
+
 
 So our full `create` controller action will look something like:
 ```
@@ -206,13 +222,17 @@ def cafe_params
 end
 ```
 
+
 ℹ️ If you've added or changed any of the attributes for your model, make sure to update the strong parameters to match.
+
 
 ##### Testing the create
 ⚠️ Now how can we test this create action? We **can't** test it by typing a URL in the browser. We need to send a `POST` request instead of a `GET`. And we don't have an HTML form either. The easiest way to test this endpoint would be to use [Postman](https://www.postman.com/). In Postman, we'll need to make sure we're sending a `POST` to the correct address, but also sending the correct params. We'll want our request to look like this:
 <p>
 <img width="1383" alt="image" src="https://github.com/dmbf29/rails-api-tutorial/assets/25542223/9f640d69-aecb-417e-af64-ad204651125e">
 </p>
+
+
 Or just the request code:
 
 ```
@@ -234,6 +254,7 @@ Or just the request code:
 }
 ```
 
+
 ### CORS
 CORS == Cross-origin resource sharing (CORS)
 A nice explanation can be found in [this article](https://www.stackhawk.com/blog/rails-cors-guide/). In summary:
@@ -242,6 +263,7 @@ A nice explanation can be found in [this article](https://www.stackhawk.com/blog
 > In the most simple scenario, CORS will block all requests from a different origin than your API. “Origin” in this case is the combination of protocol, domain, and port. If any of these three will be different between the front end and your Rails application, then CORS won’t allow the client to connect to the API.
 >
 > So, for example, if your front end is running at https://example.com:443 and your Rails application is running at https://example.com:3000, then CORS will block the connections from the front end to the Rails API. CORS will do so even if they both run on the same server.
+
 
 So the **TL;DR** is that we have to enable our front-end to access our back-end in 2 steps:
 1. Uncomment `gem "rack-cors"` in the GEMFILE, then `bundle install`
@@ -259,6 +281,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
 end
 ```
 
+
 Or to just blindly allow all (only for now)
 ```
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
@@ -269,9 +292,11 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
 end
 ```
 
+
 ## Last Feature
 We've "tagged" our cafes with certain criteria ie: `wifi`, `outlets`, `coffee` etc.
 Let's create an end-point for our front-end so that we can display all of these criteria.
+
 
 ### Criteria Route
 Add in a criteria index inside our our namespaced routes.
@@ -284,11 +309,13 @@ namespace :api, defaults: { format: :json } do
 end
 ```
 
+
 ### Criteria Controller
 Generate controller
 ```
 rails g controller api/v1/criteria
 ```
+
 
 ### Criteria Controller Action
 We don't actually have a criteria model so we're going to pull all of the criteria from our `cafe`s using the `.pluck` and `.flatten` methods. Then make sure we're not duplicating any using the `.uniq` method:
@@ -302,12 +329,8 @@ end
 We can test it out by visiting `/api/v1/criteria` in the browser which should return a JSON array of our criteria.
 
 
-
 ## Going Further
 - Adding users
 - Adding ActiveStorage and Cloudinary
 - Using JBuilder for JSON views
 - Writing tests
-
-## TODO
-- seeds
