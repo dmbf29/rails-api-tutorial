@@ -6,7 +6,7 @@ Note: the slide version of this workshop is available [here](https://slides.trou
 ## Prerequisites
 This workshop is going to be breaking down the steps of how turn a Rails app into a simple API.
 
-We'll be going under the assumption, we've build previous Rails apps before.
+We'll be going under the assumption, we've built previous Rails apps before.
 
 
 ## Create the application
