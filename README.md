@@ -22,18 +22,18 @@ We're going to keep this tutorial simple. We'll just have a `cafe` model. Based 
 </p>
 
 Data types:
-- title `->` string
-- address `->` string
-- picture `->` string (⚠️ We're not using ActiveStorage for simplicity sake).
-- hours `->` hash (⚠️ see how to create this below)
+- title ➡️ string
+- address ➡️ string
+- picture ➡️ string (⚠️ We're not using ActiveStorage for simplicity sake).
+- hours ➡️ hash (⚠️ see how to create this below)
 - ie: `"hours": { "Mon": [ "08:00 - 23:00" ], "Tue": [ "08:00 - 23:00" ], ...`
-- criteria `->` array (⚠️ see how to create this below)
+- criteria ➡️ array (⚠️ see how to create this below)
 - ie: `"criteria": [ "Stable Wi-Fi", "Power sockets", "Quiet", "Coffee", "Food" ]`
 
 
 ## Creating the Model
 Create the DB before the model
-```
+```sh
 rails db:create
 ```
 
@@ -43,7 +43,7 @@ rails db:create
 - But when we generate a `cafe` model in Rails, it creates a table called `caves`.... which is obviously **not** what we want. Here is a [StackOverflow answer on how to fix it](https://stackoverflow.com/a/10861810/8278088)
 
 So let's go into our `config/initializers/inflections.rb` and add this:
-```
+```rb
 ActiveSupport::Inflector.inflections do |inflect|
   inflect.plural "cafe", "cafes"
 end
@@ -51,7 +51,7 @@ end
 
 
 Then create the model
-```
+```sh
 rails g model cafe title:string address:string picture:string hours:jsonb criteria:string
 ```
 
@@ -60,13 +60,13 @@ You'll notice that when we create the `hours` hash, we're actually using a `json
 _You can see how this works in the [official documentaion](https://guides.rubyonrails.org/active_record_postgresql.html#json-and-jsonb)_.
 
 And also when we create the `criteria` array, we're actually specifying a string **at first**. But we'll have to update the migration (before we migrate) to indicate we're using an array:
-```
+```rb
 t.string :criteria, array: true
 ```
 _You can see how this works in the [official documentaion](https://guides.rubyonrails.org/active_record_postgresql.html#array)_.
 
 Then run the migration and our DB should be ready to go.
-```
+```sh
 rails db:migrate
 ```
 
@@ -74,7 +74,7 @@ rails db:migrate
 ## Setting up the Model
 It's up to you at this point, but we'll add two validations on the `cafe` model so that we need at least a `title` and `address` in order to create one.
 
-```
+```rb
 # cafe.rb
 validates :title, presence: true
 validates :address, presence: true
@@ -90,7 +90,7 @@ We were basing our data on around [this information](https://gist.github.com/yan
 
 
 The point of this workshop is not how to seed the DB, so the code is already set in our `db/seeds.rb` file.
-```
+```rb
 require 'open-uri'
 
 puts "Removing all cafes from the DB..."
@@ -131,7 +131,7 @@ So our user stories with routes:
 
 
 How to namespace in our `routes.rb`
-```
+```rb
 namespace :api, defaults: { format: :json } do
   namespace :v1 do
     resources :cafes, only: [ :index, :create ]
@@ -146,7 +146,7 @@ Here we're also saying to expect json (since it's an API) instead of the normal 
 Now we need to create the `cafes_controller` but we're going to create one specifically for `v1` of our `api`. This gives us flexibility later on to create a separate controller for the next version.
 
 To generate
-```
+```sh
 rails g controller api/v1/cafes
 ```
 
@@ -160,14 +160,14 @@ This creates our controller. But also, it creates a folder called `api` inside o
 
 #### Index
 Let's start with the index. It will follow normal Rails CRUD to pull all of the cafes from the DB.
-```
+```rb
 def index
   @cafes = Cafe.all
 end
 ```
 
 If we allow users to search for cafes by their `title` in our app, we can add that into our action as well:
-```
+```rb
 def index
   if params[:title].present?
     @cafes = Cafe.where('title ILIKE ?', "%#{params[:title]}%")
@@ -179,7 +179,7 @@ end
 
 
 **BUT**, this is the biggest difference from building an API compared to one with HTML views. Instead of rendering HTML, we're going to render JSON.
-```
+```rb
 def index
   if params[:title].present?
     @cafes = Cafe.where('title ILIKE ?', "%#{params[:title]}%")
@@ -199,13 +199,13 @@ Launch a `rails s` and check it out in the browser. You should be seeing JSON (i
 
 #### Create
 Our create action is going to look exactly like a normal CRUD create action, except for when an error occurs. Instead of rerendering a form like we would in HTML, we'll respond back with the error inside of the JSON response:
-```
+```rb
 render json: { error: @cafe.errors.messages }, status: :unprocessable_entity
 ```
 
 
 So our full `create` controller action will look something like:
-```
+```rb
 def create
   @cafe = Cafe.new(cafe_params)
   if @cafe.save
@@ -235,7 +235,7 @@ end
 
 Or just the request code:
 
-```
+```json
 {
   "cafe": {
     "title": "Le Wagon Tokyo",
@@ -270,7 +270,7 @@ So the **TL;DR** is that we have to enable our front-end to access our back-end 
 2. Go to `config/initializers/cors.rb` and specify from which URL (and which actions) that you are willing to accept requests
 
 _For example:_
-```
+```rb
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     origins 'http://example.com:80'
@@ -283,7 +283,7 @@ end
 
 
 Or to just blindly allow all (only for now)
-```
+```rb
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     origins '*'
@@ -300,7 +300,7 @@ Let's create an end-point for our front-end so that we can display all of these 
 
 ### Criteria Route
 Add in a criteria index inside our our namespaced routes.
-```
+```rb
 namespace :api, defaults: { format: :json } do
   namespace :v1 do
     resources :cafes, only: [ :index, :create ]
@@ -312,14 +312,14 @@ end
 
 ### Criteria Controller
 Generate controller
-```
+```sh
 rails g controller api/v1/criteria
 ```
 
 
 ### Criteria Controller Action
 We don't actually have a criteria model so we're going to pull all of the criteria from our `cafe`s using the `.pluck` and `.flatten` methods. Then make sure we're not duplicating any using the `.uniq` method:
-```
+```rb
 def index
   @criteria = Cafe.pluck(:criteria).flatten.uniq
   render json: @criteria
