@@ -2,7 +2,7 @@
 
 
 ## Create the application
-```
+```sh
 rails new NAME_OF_YOUR_APPLICATION -d postgresql --api
 ```
 With the `--api` flag, there are 3 main differences:
