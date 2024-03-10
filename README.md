@@ -78,6 +78,7 @@ You'll notice that when we create the `hours` hash, we're actually using a `json
 
 _You can see how this works in the [official documentaion](https://guides.rubyonrails.org/active_record_postgresql.html#json-and-jsonb)_.
 
+
 And also when we create the `criteria` array, we're actually specifying a string **at first**. But we'll have to update the migration (before we migrate) to indicate we're using an array:
 ```rb
 t.string :criteria, array: true
