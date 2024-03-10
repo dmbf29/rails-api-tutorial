@@ -182,9 +182,9 @@ This creates our controller. But also, it creates a folder called `api` inside o
 </p>
 
 
-### Controller Actions
+## Controller Actions
 
-#### Index
+### Index
 Let's start with the index. It will follow normal Rails CRUD to pull all of the cafes from the DB.
 ```rb
 def index
@@ -224,7 +224,7 @@ This tells us to trigger our `cafes#index` action, we need to type `/api/v1/cafe
 Launch a `rails s` and check it out in the browser. You should be seeing JSON (intead of HTML).
 
 
-#### Create
+### Create
 Our create action is going to look exactly like a normal CRUD create action, except for when an error occurs. Instead of rerendering a form like we would in HTML, we'll respond back with the error inside of the JSON response:
 ```rb
 render json: { error: @cafe.errors.messages }, status: :unprocessable_entity
@@ -254,7 +254,10 @@ end
 
 
 ##### Testing the create
-⚠️ Now how can we test this create action? We **can't** test it by typing a URL in the browser. We need to send a `POST` request instead of a `GET`. And we don't have an HTML form either. The easiest way to test this endpoint would be to use [Postman](https://www.postman.com/). In Postman, we'll need to make sure we're sending a `POST` to the correct address, but also sending the correct params. We'll want our request to look like this:
+⚠️ Now how can we test this create action? We **can't** test it by typing a URL in the browser. We need to send a `POST` request instead of a `GET`. And we don't have an HTML form either. The easiest way to test this endpoint would be to use [Postman](https://www.postman.com/). In Postman, we'll need to make sure we're sending a `POST` to the correct address, but also sending the correct params.
+
+
+We'll want our request to look like this:
 <p>
 <img width="1383" alt="image" src="https://github.com/dmbf29/rails-api-tutorial/assets/25542223/9f640d69-aecb-417e-af64-ad204651125e">
 </p>
