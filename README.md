@@ -325,7 +325,7 @@ end
 
 ## Last Feature
 We've "tagged" our cafes with certain criteria ie: `wifi`, `outlets`, `coffee` etc.
-Let's create an end-point for our front-end so that we can display all of these criteria.
+Let's create an end-point for our [front-end](https://yannklein.github.io/react-workshop-ref-feb2024/) so that we can display all of these criteria.
 
 
 ### Criteria Route
