@@ -16,11 +16,11 @@ In this [separate workshop](https://github.com/yannklein/react-workshop-ref-feb2
 
 
 ## Prerequisites
-This workshop is going to be breaking down the steps of how turn a Rails app into a simple API.
+- This workshop is going to be breaking down the steps of how turn a Rails app into a simple API.
 
-We'll be going under the assumption, we've built previous Rails apps before.
+- We'll be going under the assumption, we've built previous Rails apps before.
 
-I suggest to follow the steps to create a new app in the README instead of trying to clone it.
+- I suggest to follow the steps to create a new app in the README instead of trying to clone it.
 
 
 ## Create the application
@@ -46,9 +46,7 @@ Data types:
 - address ➡️ string
 - picture ➡️ string (⚠️ We're not using ActiveStorage for simplicity sake).
 - hours ➡️ hash (⚠️ see how to create this below)
-- ie: `"hours": { "Mon": [ "08:00 - 23:00" ], "Tue": [ "08:00 - 23:00" ], ...`
 - criteria ➡️ array (⚠️ see how to create this below)
-- ie: `"criteria": [ "Stable Wi-Fi", "Power sockets", "Quiet", "Coffee", "Food" ]`
 
 
 ## Creating the Model
