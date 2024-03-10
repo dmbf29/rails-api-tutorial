@@ -93,12 +93,13 @@ rails db:migrate
 
 
 ## Setting up the Model
-It's up to you at this point, but we'll add two validations on the `cafe` model so that we need at least a `title` and `address` in order to create one.
+It's up to you at this point, but we'll add three validations on the `cafe` model so that we need at least a `title` and `address` in order to create one. And also a uniqueness so that the same cafe at the same address can't be recreated.
 
 ```rb
 # cafe.rb
 validates :title, presence: true
 validates :address, presence: true
+validates :title, uniqueness: { scope: :address }
 ```
 
 
