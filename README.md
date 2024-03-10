@@ -1,4 +1,5 @@
-# Rails API Tutorial - Cafes Example
+# Rails API Tutorial
+### Cafes Example
 
 Note: the slide version of this workshop is available [here](https://slides.trouni.com/?src=https://raw.githubusercontent.com/dmbf29/rails-api-tutorial/master/README.md#/).
 
