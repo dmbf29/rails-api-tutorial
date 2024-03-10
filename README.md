@@ -3,10 +3,20 @@
 Note: the slide version of this workshop is available [here](https://slides.trouni.com/?src=https://raw.githubusercontent.com/dmbf29/rails-api-tutorial/master/README.md#/).
 
 
+## Goal - Back End
+We will build a Rails application that acts solely as an API. Instead of displaying HTML pages, it'll render JSON.
+
+
+## Goal - Front End
+In this [workshop](https://github.com/yannklein/react-workshop-ref-feb2024/), we'll build a React application to consume this API.
+
+
 ## Prerequisites
 This workshop is going to be breaking down the steps of how turn a Rails app into a simple API.
 
 We'll be going under the assumption, we've built previous Rails apps before.
+
+I suggest to follow the steps to create a new app in the README instead of trying to clone it.
 
 
 ## Create the application
@@ -19,8 +29,6 @@ With the `--api` flag, there are 3 main differences:
 - Configure the generators to skip generating views, helpers, and assets when you generate a new resource.
 
 You can read more about the changes in the [official documentation](https://guides.rubyonrails.org/api_app.html).
-
-Also, the `-d` makes sure we start with a postgresql database (instead of the default sqlite)
 
 
 ## Designing the DB
