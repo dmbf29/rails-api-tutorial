@@ -37,16 +37,16 @@ You can read more about the changes in the [official documentation](https://guid
 
 ## Designing the DB
 We're going to keep this tutorial simple. We'll just have a `cafe` model. Based around [this information](https://gist.github.com/yannklein/5d8f9acb1c22549a4ede848712ed651a), which we'll be seeding into our app eventually.
+
 <p>
   <img width="108" alt="image" src="https://github.com/dmbf29/rails-api-tutorial/assets/25542223/daa380d6-26da-4e1f-8e66-40293899a571">
 </p>
 
-Data types:
-- title ➡️ string
-- address ➡️ string
-- picture ➡️ string (⚠️ We're not using ActiveStorage for simplicity sake).
-- hours ➡️ hash (⚠️ see how to create this below)
-- criteria ➡️ array (⚠️ see how to create this below)
+- `title`: string
+- `address`: string
+- `picture`: string (⚠️ We're not using ActiveStorage for simplicity sake).
+- `hours`: hash (⚠️ see how to create this below)
+- `criteria`: array (⚠️ see how to create this below)
 
 
 ## Creating the Model
