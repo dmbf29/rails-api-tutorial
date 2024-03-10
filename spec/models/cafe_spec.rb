@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Cafe, type: :model do
-  let(:cafe) { Cafe.new(title: 'cafe', address: '2-11-3 Meguro, Meguro-ku, Tokyo 153-0063') }
+  let(:cafe) { Cafe.new(title: 'Le Wagon Tokyo', address: '2-11-3 Meguro, Meguro-ku, Tokyo 153-0063') }
 
   describe '#initialize' do
     context 'when valid' do
