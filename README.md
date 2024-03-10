@@ -360,7 +360,7 @@ We can test it out by visiting `/api/v1/criteria` in the browser which should re
 
 
 ## Going Further
-- Adding users
-- Adding ActiveStorage and Cloudinary
-- Using JBuilder for JSON views
-- Writing tests
+- Adding users 👉 [Le Wagon student tutorial](https://kitt.lewagon.com/knowledge/tutorials/rails_api)
+- Adding ActiveStorage and Cloudinary 👉 [Setup instructions](https://doug-berkley.notion.site/Heroku-Cloudinary-Checklist-bb68c46ef8ad42fea97924c8c338aaf7)
+- Using JBuilder for JSON views 👉  `git checkout jbuilder`
+- Writing tests 👉 [Setup RSpec](https://github.com/Naokimi/testing_with_rspec/tree/master)
