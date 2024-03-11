@@ -237,7 +237,7 @@ So our full `create` controller action will look something like:
 def create
   @cafe = Cafe.new(cafe_params)
   if @cafe.save
-    render json: @cafe
+    render json: @cafe, status: :created
   else
     render json: { error: @cafe.errors.messages }, status: :unprocessable_entity
   end
@@ -246,7 +246,7 @@ end
 private
 
 def cafe_params
-  params.require(:cafe).permit(:title, :address, :picture, :address, hours: {}, criteria: [])
+  params.require(:cafe).permit(:title, :address, :picture, hours: {}, criteria: [])
 end
 ```
 
