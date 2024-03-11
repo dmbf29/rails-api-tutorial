@@ -36,6 +36,13 @@ With the `--api` flag, there are 3 main differences:
 You can read more about the changes in the [official documentation](https://guides.rubyonrails.org/api_app.html).
 
 
+## Create Github repository
+Feel free to change the respository name:
+```sh
+gh repo create rails-cafe-api --public --source=.
+```
+
+
 ## Designing the DB
 We're going to keep this tutorial simple. We'll just have a `cafe` model. Based around [this information](https://gist.github.com/yannklein/5d8f9acb1c22549a4ede848712ed651a), which we'll be seeding into our app eventually.
 
@@ -226,36 +233,10 @@ Launch a `rails s` and check it out in the browser. You should be seeing JSON (i
 
 
 ### Create
-Our create action is going to look exactly like a normal CRUD create action, except for when an error occurs. Instead of rerendering a form like we would in HTML, we'll respond back with the error inside of the JSON response:
-```rb
-render json: { error: @cafe.errors.messages }, status: :unprocessable_entity
-```
-
-
-So our full `create` controller action will look something like:
-```rb
-def create
-  @cafe = Cafe.new(cafe_params)
-  if @cafe.save
-    render json: @cafe, status: :created
-  else
-    render json: { error: @cafe.errors.messages }, status: :unprocessable_entity
-  end
-end
-
-private
-
-def cafe_params
-  params.require(:cafe).permit(:title, :address, :picture, hours: {}, criteria: [])
-end
-```
-
-
-ℹ️ If you've added or changed any of the attributes for your model, make sure to update the strong parameters to match.
 
 
 ##### Testing the create
-⚠️ Now how can we test this create action? We **can't** test it by typing a URL in the browser. We need to send a `POST` request instead of a `GET`. And we don't have an HTML form either. The easiest way to test this endpoint would be to use [Postman](https://www.postman.com/). In Postman, we'll need to make sure we're sending a `POST` to the correct address, but also sending the correct params.
+⚠️ How can we test this create action? We **can't** test it by typing a URL in the browser. We need to send a `POST` request instead of a `GET`. And we don't have an HTML form either. The easiest way to test this endpoint would be to use [Postman](https://www.postman.com/). In Postman, we'll need to make sure we're sending a `POST` to the correct address, but also sending the correct params.
 
 
 We'll want our request to look like this:
@@ -283,6 +264,32 @@ Or just the request code:
     }
   }
 }
+```
+
+
+##### Controller
+Our create action is going to look exactly like a normal CRUD create action, except for when an error occurs. Instead of rerendering a form like we would in HTML, we'll respond back with the error inside of the JSON response:
+```rb
+render json: { error: @cafe.errors.messages }, status: :unprocessable_entity
+```
+
+
+So our full `create` controller action will look something like:
+```rb
+def create
+  @cafe = Cafe.new(cafe_params)
+  if @cafe.save
+    render json: @cafe, status: :created
+  else
+    render json: { error: @cafe.errors.messages }, status: :unprocessable_entity
+  end
+end
+
+private
+
+def cafe_params
+  params.require(:cafe).permit(:title, :address, :picture, hours: {}, criteria: [])
+end
 ```
 
 
