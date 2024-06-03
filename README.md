@@ -4,6 +4,14 @@
 Note: the slide version of this workshop is available [here](https://slides.trouni.com/?src=https://raw.githubusercontent.com/dmbf29/rails-api-tutorial/master/README.md#/).
 
 
+## Prerequisites
+- This workshop is going to be breaking down the steps of how turn a Rails app into a simple API.
+
+- We'll be going under the assumption, we've built previous Rails apps before.
+
+- I suggest to follow the steps to create a new app in the README instead of trying to clone it.
+
+
 ## Goal - Back End
 We will build a Rails application that acts solely as an API. Instead of displaying HTML pages, it'll render JSON.
 <p><img width="600" alt="image" src="https://github.com/dmbf29/rails-api-tutorial/assets/25542223/d701384d-f4e4-42fa-8ced-7dd070ec70b5"></p>
@@ -14,14 +22,6 @@ In this [separate workshop](https://github.com/yannklein/react-workshop), we'll 
 <p>
 <img width="600" alt="image" src="https://github.com/dmbf29/rails-api-tutorial/assets/25542223/252a1b9b-6a94-482e-9ccc-015d4f1fd302">
 </p>
-
-
-## Prerequisites
-- This workshop is going to be breaking down the steps of how turn a Rails app into a simple API.
-
-- We'll be going under the assumption, we've built previous Rails apps before.
-
-- I suggest to follow the steps to create a new app in the README instead of trying to clone it.
 
 
 ## Create the application
