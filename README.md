@@ -10,7 +10,7 @@ We will build a Rails application that acts solely as an API. Instead of display
 
 
 ## Goal - Front End
-In this [separate workshop](https://github.com/yannklein/react-workshop-ref-feb2024/), we'll build a [React application](https://yannklein.github.io/react-workshop-ref-feb2024/) to consume this API.
+In this [separate workshop](https://github.com/yannklein/react-workshop), we'll build a [React application]([https://yannklein.github.io/react-workshop-ref-feb2024/](https://yannklein.github.io/react-workshop-ref/)) to consume this API.
 <p>
 <img width="600" alt="image" src="https://github.com/dmbf29/rails-api-tutorial/assets/25542223/252a1b9b-6a94-482e-9ccc-015d4f1fd302">
 </p>
