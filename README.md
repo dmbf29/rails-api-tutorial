@@ -333,8 +333,9 @@ end
 ## Going Further
 - Adding users and Pundit 👉 [Le Wagon student tutorial](https://kitt.lewagon.com/knowledge/tutorials/rails_api)
 - Adding ActiveStorage and Cloudinary 👉 [Setup instructions](https://doug-berkley.notion.site/Heroku-Cloudinary-Checklist-bb68c46ef8ad42fea97924c8c338aaf7)
-- Using JBuilder for JSON views 👉  `git checkout jbuilder`
+- Using JBuilder for JSON views 👉  [jbuilder docs](https://github.com/rails/jbuilder) / [jbuilder example](https://github.com/dmbf29/rails-api-tutorial/blob/jbuilder/app/views/api/v1/cafes/index.json.jbuilder)
 - Writing tests 👉 [Setup RSpec](https://github.com/Naokimi/testing_with_rspec/tree/master), Video [part 1](https://youtu.be/YE16i6zouow) and [part 2](https://youtu.be/Q9U0p89Lqp4)
+- Test Examples 👉 [Controller Example](https://github.com/dmbf29/rails-api-tutorial/blob/master/spec/controllers/cafes_controller_spec.rb) / [Model Example](https://github.com/dmbf29/rails-api-tutorial/blob/master/spec/models/cafe_spec.rb)
 
 
 ## Additional (Optional) Feature
