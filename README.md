@@ -105,9 +105,8 @@ It's up to you at this point, but we'll add three validations on the `cafe` mode
 
 ```rb
 # cafe.rb
-validates :title, presence: true
+validates :title, presence: true, uniqueness: { scope: :address }
 validates :address, presence: true
-validates :title, uniqueness: { scope: :address }
 ```
 
 
