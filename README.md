@@ -26,7 +26,7 @@ In this [separate workshop](https://github.com/yannklein/react-workshop), we'll 
 
 ## Create the application
 ```sh
-rails new NAME_OF_YOUR_APPLICATION -d postgresql --api
+rails new rails-cafe-api -d postgresql --api
 ```
 With the `--api` flag, there are 3 main differences:
 - Configure your application to start with a more limited set of middleware than normal. Specifically, it will not include any middleware primarily useful for browser applications (like cookies support) by default.
