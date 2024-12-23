@@ -4,18 +4,6 @@
 Note: the slide version of this workshop is available [here](https://slides.trouni.com/?src=https://raw.githubusercontent.com/dmbf29/rails-api-tutorial/master/README.md#/).
 
 
-## Goal - Back End
-We will build a Rails application that acts solely as an API. Instead of displaying HTML pages, it'll render JSON.
-<p><img width="600" alt="image" src="https://github.com/dmbf29/rails-api-tutorial/assets/25542223/d701384d-f4e4-42fa-8ced-7dd070ec70b5"></p>
-
-
-## Goal - Front End
-In this [separate workshop](https://github.com/yannklein/react-workshop-ref-feb2024/), we'll build a [React application](https://yannklein.github.io/react-workshop-ref-feb2024/) to consume this API.
-<p>
-<img width="600" alt="image" src="https://github.com/dmbf29/rails-api-tutorial/assets/25542223/252a1b9b-6a94-482e-9ccc-015d4f1fd302">
-</p>
-
-
 ## Prerequisites
 - This workshop is going to be breaking down the steps of how turn a Rails app into a simple API.
 
@@ -24,9 +12,21 @@ In this [separate workshop](https://github.com/yannklein/react-workshop-ref-feb2
 - I suggest to follow the steps to create a new app in the README instead of trying to clone it.
 
 
+## Goal - Back End
+We will build a Rails application that acts solely as an API. Instead of displaying HTML pages, it'll render JSON.
+<p><img width="600" alt="image" src="https://github.com/dmbf29/rails-api-tutorial/assets/25542223/d701384d-f4e4-42fa-8ced-7dd070ec70b5"></p>
+
+
+## Goal - Front End
+In this [separate workshop](https://github.com/yannklein/react-workshop), we'll build a [React application](https://yannklein.github.io/react-workshop-ref/) to consume this API.
+<p>
+<img width="600" alt="image" src="https://github.com/dmbf29/rails-api-tutorial/assets/25542223/252a1b9b-6a94-482e-9ccc-015d4f1fd302">
+</p>
+
+
 ## Create the application
 ```sh
-rails new NAME_OF_YOUR_APPLICATION -d postgresql --api
+rails new rails-cafe-api -d postgresql --api
 ```
 With the `--api` flag, there are 3 main differences:
 - Configure your application to start with a more limited set of middleware than normal. Specifically, it will not include any middleware primarily useful for browser applications (like cookies support) by default.
@@ -105,9 +105,8 @@ It's up to you at this point, but we'll add three validations on the `cafe` mode
 
 ```rb
 # cafe.rb
-validates :title, presence: true
+validates :title, presence: true, uniqueness: { scope: :address }
 validates :address, presence: true
-validates :title, uniqueness: { scope: :address }
 ```
 
 
@@ -331,7 +330,15 @@ end
 ```
 
 
-## Last Feature
+## Going Further
+- Adding users and Pundit 👉 [Le Wagon student tutorial](https://kitt.lewagon.com/knowledge/tutorials/rails_api)
+- Adding ActiveStorage and Cloudinary 👉 [Setup instructions](https://doug-berkley.notion.site/Heroku-Cloudinary-Checklist-bb68c46ef8ad42fea97924c8c338aaf7)
+- Using JBuilder for JSON views 👉  [jbuilder docs](https://github.com/rails/jbuilder) / [jbuilder example](https://github.com/dmbf29/rails-api-tutorial/blob/jbuilder/app/views/api/v1/cafes/index.json.jbuilder)
+- Writing tests 👉 [Setup RSpec](https://github.com/Naokimi/testing_with_rspec/tree/master), Video [part 1](https://youtu.be/YE16i6zouow) and [part 2](https://youtu.be/Q9U0p89Lqp4)
+- Test Examples 👉 [Controller Example](https://github.com/dmbf29/rails-api-tutorial/blob/master/spec/controllers/cafes_controller_spec.rb) / [Model Example](https://github.com/dmbf29/rails-api-tutorial/blob/master/spec/models/cafe_spec.rb)
+
+
+## Additional (Optional) Feature
 We've "tagged" our cafes with certain criteria ie: `wifi`, `outlets`, `coffee` etc.
 Let's create an end-point for our [front-end](https://yannklein.github.io/react-workshop-ref-feb2024/) so that we can display all of these criteria.
 
@@ -365,10 +372,3 @@ end
 ```
 
 We can test it out by visiting `/api/v1/criteria` in the browser which should return a JSON array of our criteria.
-
-
-## Going Further
-- Adding users and Pundit 👉 [Le Wagon student tutorial](https://kitt.lewagon.com/knowledge/tutorials/rails_api)
-- Adding ActiveStorage and Cloudinary 👉 [Setup instructions](https://doug-berkley.notion.site/Heroku-Cloudinary-Checklist-bb68c46ef8ad42fea97924c8c338aaf7)
-- Using JBuilder for JSON views 👉  `git checkout jbuilder`
-- Writing tests 👉 [Setup RSpec](https://github.com/Naokimi/testing_with_rspec/tree/master), Video [part 1](https://youtu.be/YE16i6zouow) and [part 2](https://youtu.be/Q9U0p89Lqp4)
