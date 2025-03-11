@@ -41,7 +41,10 @@
     </div>
     <script>
       document.querySelector('#button-addon2').addEventListener('click', async () => {
-        const url = `https://matcha-and-keyboard-f549965e60e7.herokuapp.com/api/v1/${document.querySelector('input').value}`;
+        // TODO: Change this to your endpoint in production
+        const url = `http://localhost:3000/api/v1/${document.querySelector('input').value}`;
+        console.log(url);
+
         const response = await fetch(url);
         const data = await response.json();
         document.querySelector('textarea').value = JSON.stringify(data, null, 2);
