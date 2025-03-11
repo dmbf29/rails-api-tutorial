@@ -338,6 +338,36 @@ end
 - Test Examples 👉 [Controller Example](https://github.com/dmbf29/rails-api-tutorial/blob/master/spec/controllers/cafes_controller_spec.rb) / [Model Example](https://github.com/dmbf29/rails-api-tutorial/blob/master/spec/models/cafe_spec.rb)
 
 
+## Adding a Front-End
+Without knowing the endpoints or having our React app up and running, we have no way to interact with this app. So we can build a simple interface so that someone can play around with our API. 
+<img width="691" alt="image" src="https://github.com/user-attachments/assets/305538ff-16a7-45c5-8ec8-b5508319c019" />
+
+
+##### Generate the Controller
+```bash
+rails g controller pages home
+```
+Let's generate this controller (plus the view), but we need to be careful here on what it's creating. We need to update the routes and controller.
+
+
+##### Update the Controller
+You might notice that the new controller inheriting from  `ApplicationController` which is inheriting from `ActionController::API`. It's using the API module because we created our app with the `--api` flag. This limits our app to only API functionality so we can change it back to the normal Rails flow. So, our controller should inherit from `ActionController::Base`
+```ruby
+class PagesController < ActionController::Base
+  def home
+  end
+end
+```
+
+
+##### Update the Routes
+The generator also created a route `get "pages/home"`, which actually isn't useful to us at all. Let's go into our `config/routes.rb` file and change that to `root to: pages#home` instead.
+
+
+##### Update the View
+Since we used the `--api` flag when creating the app, we don't have the typical `views/layouts/application.html.erb` file anymore. Our app wasn't expecting any HTML views. So for our `home.html.erb` page, We'll have to add a full HTML setup. You can use the [one in this tutorial](https://github.com/dmbf29/rails-api-tutorial/blob/master/app/views/pages/home.html.erb) as a starting point.
+
+
 ## Additional (Optional) Feature
 We've "tagged" our cafes with certain criteria ie: `wifi`, `outlets`, `coffee` etc.
 Let's create an end-point for our [front-end](https://yannklein.github.io/react-workshop-ref-feb2024/) so that we can display all of these criteria.
